@@ -5,3 +5,4 @@
 
 int getFileLength(char * filename);
 int getChars(char * filename, int * firstChar, int * secondChar);
+void printList(int * list, int length);

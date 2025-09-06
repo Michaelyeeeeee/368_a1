@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
     return 0;
   }
 
-  // initializes arrays for parents and childs
+  // initializes arrays for parents and children
   int filelength = getFileLength(argv[1]);
   int firstChar[filelength];
   int secondChar[filelength];
@@ -20,15 +20,27 @@ int main(int argc, char **argv) {
     secondChar[i] = -1;
   }
 
+  // if invalid parent-child pairs
   if(getChars(argv[1], firstChar, secondChar) == 0){
+    printList(firstChar, filelength);
+    printList(secondChar, filelength);
     printf("INVALID\n");
     return 0;
   }
   else{
-    Node * nodelist[MAXNODES];
-    for(int i = 0; i < MAXNODES; i++){
-        nodelist[i] = createNode(A + i);
-    }
+    printList(firstChar, filelength);
+    printList(secondChar, filelength);
+    // creates list of all nodes in firstChar and secondChar
+    Node ** nodelist = createNodelist();
+    if(!nodelist) return 0;
+    // creates tree and gets roots
+    Node ** rootlist = createTree(nodelist, firstChar, secondChar, filelength);
+    if(!rootlist) return 0;
+    // prints all trees in rootlist
+    printAllTrees(rootlist);
+    // frees all allocated memory
+    freeNodelist(nodelist);
+    free(rootlist);
   }
 
   return 0;
