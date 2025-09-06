@@ -117,66 +117,6 @@ void freeQueue(Queue *q) {
     free(q);
 }
 
-
-// \n for new level, no space between siblings, space between same level not siblings
-// # to represent null child node, 
-/*
-input:
-AB
-BC
-BD
-AE
-EF 
-
-output:
-A
-BE
-CD F
-# # # 
-
-*/
-// BFS level-order print
-
-/*
-void printTree(Node *root) {
-    if (!root) return;
-
-    Queue *q = createQueue(MAXNODES);
-    enqueue(q, root);
-    enqueue(q, NULL); // level separator
-
-    while (!isEmpty(q)) {
-        Node *curr = dequeue(q);
-        if (curr == NULL) {
-            printf("\n");
-            if (!isEmpty(q))
-                enqueue(q, NULL);
-            continue;
-        }
-
-        // print current node
-        printf("%c", curr->data);
-
-        // enqueue children
-        Node *child = curr->first_child;
-        if (child) {
-            while (child) {
-                enqueue(q, child);
-                child = child->next;
-            }
-        } else {
-            // no children, mark null
-            printf(" #");
-        }
-
-        // space between siblings
-        if (!isEmpty(q) && q->data[q->front] != NULL)
-            printf(" ");
-    }
-
-    freeQueue(q);
-} */
-
 void printTree(Node *root) {
     if (!root) return;
 
@@ -197,7 +137,9 @@ void printTree(Node *root) {
         // check to see if last level
         int anyChild = 0;
         // iterate through parents in current level
-        for (int i = 0; i < curr_n; ++i) {
+        for (int i = 0; i < curr_n; i++) {
+            if (i > 0) printf(" ");
+
             Node *p = curr[i];
             // if parent is null
             if (!p || !p->data) {
@@ -224,8 +166,6 @@ void printTree(Node *root) {
                 if (printed) anyChild = 1;
                 else printf("#");
             }
-            // space between siblings
-            if (i < curr_n - 1) printf(" ");
         }
 
         printf("\n");
