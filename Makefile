@@ -1,16 +1,20 @@
-# Define a variable for the compiler
+
 CC = gcc
-
-# Define a variable for compiler flags
 CFLAGS = -Wall -g
+SRCS = a1.c chars.c tree.c
+OBJS = $(SRCS:.c=.o)
+TARGET = a1
 
-# Define the target executable name
-TARGET = myprogram
+.PHONY: all clean
 
-# Rule to build the 'myprogram' target
-$(TARGET): a1.c
-	$(CC) $(CFLAGS) -o $(TARGET) main.c
+all: $(TARGET)
 
-# Rule to clean up generated files
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS)
+
+# implicit rule will compile .c -> .o; explicit if you prefer:
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -f $(TARGET)
+	rm -f $(OBJS) $(TARGET)
