@@ -22,14 +22,10 @@ int main(int argc, char **argv) {
 
   // if invalid parent-child pairs
   if(getChars(argv[1], firstChar, secondChar) == 0){
-    printList(firstChar, filelength);
-    printList(secondChar, filelength);
     printf("INVALID\n");
     return 0;
   }
   else{
-    printList(firstChar, filelength);
-    printList(secondChar, filelength);
     // creates list of all nodes in firstChar and secondChar
     Node ** nodelist = createNodelist();
     if(!nodelist) return 0;
