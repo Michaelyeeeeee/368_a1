@@ -12,7 +12,6 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS)
 
-# implicit rule will compile .c -> .o; explicit if you prefer:
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 

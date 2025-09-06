@@ -136,10 +136,12 @@ CD F
 
 */
 // BFS level-order print
+
+/*
 void printTree(Node *root) {
     if (!root) return;
 
-    Queue *q = createQueue(MAXNODES); // adjust size if needed
+    Queue *q = createQueue(MAXNODES);
     enqueue(q, root);
     enqueue(q, NULL); // level separator
 
@@ -173,6 +175,67 @@ void printTree(Node *root) {
     }
 
     freeQueue(q);
+} */
+
+void printTree(Node *root) {
+    if (!root) return;
+
+    Node *curr[MAXNODES];
+    int curr_n = 0;
+    curr[curr_n++] = root;
+    // prints roots 
+    for (int i = 0; i < curr_n; ++i) {
+        if (curr[i] && curr[i]->data) printf("%c", curr[i]->data);
+    }
+    printf("\n");
+    // print all children level by level    
+    while (1) {
+        // next level children
+        Node *next[MAXNODES];
+        // number of next level children
+        int next_n = 0;
+        // check to see if last level
+        int anyChild = 0;
+        // iterate through parents in current level
+        for (int i = 0; i < curr_n; ++i) {
+            Node *p = curr[i];
+            // if parent is null
+            if (!p || !p->data) {
+                printf("#");
+            } 
+            else {  
+                int printed = 0;
+                // iterate's  through parent's children
+                for (int a = 0; a < 26; a++) {
+                    Node *child = p->first_child;
+                    // if children left
+                    while (child) {
+                        // if child's data matches current letter
+                        if (child->data == (char)(A + a)) {
+                            printf("%c", 'A' + a);
+                            next[next_n++] = child; //enqueue
+                            printed = 1;
+                            break; // move to next child
+                        }
+                        child = child->next;
+                    }
+                }
+                // checks if any children were printed
+                if (printed) anyChild = 1;
+                else printf("#");
+            }
+            // space between siblings
+            if (i < curr_n - 1) printf(" ");
+        }
+
+        printf("\n");
+        // if no children in next level, break
+        if (!anyChild) break;
+
+        // moves to next level
+        curr_n = next_n;    
+        for (int i = 0; i < next_n; ++i) curr[i] = next[i];
+    }
 }
 
 // prints all trees in rootlist
