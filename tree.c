@@ -81,14 +81,14 @@ Node ** createTree(Node ** nodelist, int * firstChar, int * secondChar, int leng
             rootlist[i] = nodelist[i];
         }
     }
-
+    /*
     // free unused nodes in nodelist
     for(int i = 0; i < MAXNODES; i++){
         if(!nodelist[i]->data){
             free(nodelist[i]);
         }
     }
-
+    */
     return rootlist;
 }
 
@@ -131,7 +131,7 @@ void printTree(Node *root) {
     // print all children level by level    
     while (1) {
         // next level children
-        Node *next[MAXNODES];
+        Node *next[MAXNODES] = {0};
         // number of next level children
         int next_n = 0;
         // check to see if last level
@@ -168,7 +168,7 @@ void printTree(Node *root) {
             }
         }
         // if no children in next level, break
-        if (!anyChild) break;
+        if (!anyChild) break;   
         printf("\n");
 
         // moves to next level
