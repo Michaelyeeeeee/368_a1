@@ -1,4 +1,5 @@
 #include "chars.h"
+#include "tree.h"
 
 void printList(int * list, int length){
     printf("List: ");
