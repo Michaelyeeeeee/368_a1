@@ -1,6 +1,6 @@
 #include "chars.h"
 #include "tree.h"
-
+/*
 void printList(int * list, int length){
     printf("List: ");
     for(int i = 0; i < length; i++){    
@@ -8,12 +8,12 @@ void printList(int * list, int length){
         else printf("%c ", list[i]);
     }
     printf("\n");
-}
+} */
 
 // gets number of lines in file to determine number of parent children pairs
 int getFileLength(char * filename){
     FILE * file = fopen(filename, "r");
-    if(!file) {perror(filename); return 0;}
+    if(!file) {perror(filename); return -1;}
     char buf[128];
     int lines = 0;
     while (fgets(buf, sizeof(buf), file) != NULL) {
@@ -58,7 +58,7 @@ int getChars(char * filename, int * firstChar, int * secondChar){
     return 1;
 } */
 
-int getChars(char * filename, int * firstChar, int * secondChar){
+int getChars(char * filename, int * firstChar, int * secondChar, int maxlines){
     FILE * file = fopen(filename, "r");
     if(!file) return 0;
 
@@ -68,6 +68,10 @@ int getChars(char * filename, int * firstChar, int * secondChar){
     int adj[26][26] = {{0}}; // adjacency matrix used while reading for cycle checks
 
     while(fgets(buf, sizeof(buf), file) != NULL){
+        if (count >= maxlines) { 
+            fclose(file);
+            return 0;
+        }
         /* find first two uppercase letters A-Z in the line */
         char p = 0, c = 0;
         for(int i=0; buf[i] && (p==0 || c==0); i++){
@@ -78,7 +82,8 @@ int getChars(char * filename, int * firstChar, int * secondChar){
         }
         if(!p || !c){ fclose(file); return 0; } // malformed line
 
-        int pi = p - 'A', ci = c - 'A';
+        int pi = p - 'A';
+        int ci = c - 'A';
         if(pi < 0 || pi >= 26 || ci < 0 || ci >= 26){ fclose(file); return 0; }
 
         /* check child already has a parent */

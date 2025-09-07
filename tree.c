@@ -113,6 +113,7 @@ Node *dequeue(Queue *q) {
 }
 
 void freeQueue(Queue *q) {
+    if(!q) return;
     free(q->data);
     free(q);
 }
