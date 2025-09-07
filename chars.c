@@ -95,7 +95,7 @@ int getChars(char * filename, int * firstChar, int * secondChar, int maxlines){
 
         /* accept the edge */
         adj[pi][ci] = 1;
-        seenChild[ci] = 1;
+        seenChild[ci] = 1;  
         firstChar[count] = p;
         secondChar[count] = c;
         count++;

@@ -26,3 +26,4 @@ Node *dequeue(Queue *q);
 void freeQueue(Queue *q);
 void printTree(Node *root);
 void printAllTrees(Node ** rootlist);
+void freeRootlist(Node ** rootlist);

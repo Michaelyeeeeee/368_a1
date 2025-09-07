@@ -93,6 +93,12 @@ Node ** createTree(Node ** nodelist, int * firstChar, int * secondChar, int leng
     return rootlist;
 }
 
+void freeRootlist(Node ** rootlist){
+    for(int i = 0; i < MAXNODES; i++){
+        free(rootlist[i]);
+    }
+}
+
 Queue *createQueue(int size) {
     Queue *q = malloc(sizeof(Queue));
     q->data = malloc(size * sizeof(Node *));
@@ -140,6 +146,7 @@ void printTree(Node *root) {
         int anyChild = 0;
         // iterate through parents in current level
         for (int i = 0; i < curr_n; i++) {
+            if(i >= MAXNODES) break;
             if (i > 0) printf(" ");
 
             Node *p = curr[i];

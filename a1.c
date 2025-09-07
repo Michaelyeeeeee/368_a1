@@ -21,11 +21,13 @@
         fprintf(stderr, "Error: input file '%s' is empty\n", argv[1]);
         return 1;
     }
+    // malloc parent and child arrays
     int *firstChar = malloc(filelength * sizeof(int));
     int *secondChar = malloc(filelength * sizeof(int));
     if (!firstChar || !secondChar) {
         fprintf(stderr, "Allocation failure\n");
-        free(firstChar); free(secondChar);
+        free(firstChar); 
+        free(secondChar);
         return 1;
     }
     for(int i = 0; i < filelength; i++){
@@ -60,6 +62,7 @@
     // frees all allocated memory
     freeNodelist(nodelist);
     free(nodelist);
+    // freeRootlist(rootlist);
     free(rootlist);
     free(firstChar);
     free(secondChar);
