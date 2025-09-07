@@ -76,8 +76,8 @@ Node ** createTree(Node ** nodelist, int * firstChar, int * secondChar, int leng
         rootlist[i] = NULL;
     }
     // adds roots to rootlist
-    for(int i = 0; i < MAXNODES; i++){
-        if(!isChild[i] && nodelist[i]->first_child && nodelist[i]->data){
+    for(int i = 0; i < MAXNODES; i++){  
+        if(!isChild[i] && nodelist[i]->data){
             rootlist[i] = nodelist[i];
         }
     }
@@ -168,9 +168,9 @@ void printTree(Node *root) {
                 else printf("#");
             }
         }
+        printf("\n");
         // if no children in next level, break
         if (!anyChild) break;   
-        printf("\n");
 
         // moves to next level
         curr_n = next_n;    

@@ -53,12 +53,13 @@
       free(firstChar);
       free(secondChar);
       return 0;
-    }
+    } 
 
     // prints all trees in rootlist
     printAllTrees(rootlist);
     // frees all allocated memory
     freeNodelist(nodelist);
+    free(nodelist);
     free(rootlist);
     free(firstChar);
     free(secondChar);
