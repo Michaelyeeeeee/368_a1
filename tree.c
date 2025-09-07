@@ -76,9 +76,10 @@ Node ** createTree(Node ** nodelist, int * firstChar, int * secondChar, int leng
         rootlist[i] = NULL;
     }
     // adds roots to rootlist
-    for(int i = 0; i < MAXNODES; i++){  
+    int rootCount = 0;
+    for(int i = 0; i < MAXNODES; i++){
         if(!isChild[i] && nodelist[i]->data){
-            rootlist[i] = nodelist[i];
+            rootlist[rootCount++] = nodelist[i];
         }
     }
     /*
