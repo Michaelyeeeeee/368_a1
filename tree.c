@@ -168,10 +168,10 @@ void printTree(Node *root) {
                 else printf("#");
             }
         }
-        printf("\n");
+        
         // if no children in next level, break
         if (!anyChild) break;   
-
+        printf("\n");
         // moves to next level
         curr_n = next_n;    
         for (int i = 0; i < next_n; ++i) curr[i] = next[i];
