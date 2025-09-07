@@ -35,7 +35,7 @@
 
     // if invalid parent-child pairs
     if(getChars(argv[1], firstChar, secondChar, filelength) == 0){
-      printf("INVALI\n");
+      printf("INVALID\n");
       free(firstChar);
       free(secondChar);
       return 0;
