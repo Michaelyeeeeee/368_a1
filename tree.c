@@ -82,55 +82,28 @@ Node ** createTree(Node ** nodelist, int * firstChar, int * secondChar, int leng
             rootlist[rootCount++] = nodelist[i];
         }
     }
-    /*
-    // free unused nodes in nodelist
-    for(int i = 0; i < MAXNODES; i++){
-        if(!nodelist[i]->data){
-            free(nodelist[i]);
-        }
-    }
-    */
+
     return rootlist;
 }
 
 void freeRootlist(Node ** rootlist){
-    for(int i = 0; i < MAXNODES; i++){
+    for(int i = MAXNODES - 1; i >= 0; i--){
         free(rootlist[i]);
     }
+    free(rootlist);
 }
 
-Queue *createQueue(int size) {
-    Queue *q = malloc(sizeof(Queue));
-    q->data = malloc(size * sizeof(Node *));
-    q->front = q->rear = 0;
-    q->size = size;
-    return q;
-}
 
-int isEmpty(Queue *q) {
-    return q->front == q->rear;
-}
-
-void enqueue(Queue *q, Node *n) {
-    q->data[q->rear++] = n;
-}
-
-Node *dequeue(Queue *q) {
-    return q->data[q->front++];
-}
-
-void freeQueue(Queue *q) {
-    if(!q) return;
-    free(q->data);
-    free(q);
-}
-
+// prints tree level by level
+// each loop grabs parent level and prints all children in order
+// if no children for node, prints #
+// if no children in next level, stops
 void printTree(Node *root) {
     if (!root) return;
 
     Node *curr[MAXNODES];
     int curr_n = 0;
-    curr[curr_n++] = root;
+    curr[curr_n++] = root; // holds all nodes in current level to print
     // prints roots 
     for (int i = 0; i < curr_n; ++i) {
         if (curr[i] && curr[i]->data) printf("%c", curr[i]->data);

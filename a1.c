@@ -50,12 +50,28 @@
       return 0;
     }
     // creates tree and gets roots
-    Node ** rootlist = createTree(nodelist, firstChar, secondChar, filelength);
+    Node **rootlist = malloc(MAXNODES * sizeof(Node *));
     if(!rootlist) {
       free(firstChar);
       free(secondChar);
+      freeNodelist(nodelist);
+      free(nodelist);
       return 0;
     } 
+    for (int i = 0; i < MAXNODES; i++) {
+      rootlist[i] = NULL;
+    }
+    rootlist = createTree(nodelist, firstChar, secondChar, filelength);
+    if (rootlist == 0) {
+        printf("Failed to create tree\n");
+        freeRootlist(rootlist);
+        free(rootlist);
+        freeNodelist(nodelist);
+        free(nodelist);
+        free(firstChar);
+        free(secondChar);
+        return 1;
+    }
 
     // prints all trees in rootlist
     printAllTrees(rootlist);
