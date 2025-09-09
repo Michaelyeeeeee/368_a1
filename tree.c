@@ -167,7 +167,16 @@ void printAllTrees(Node ** rootlist){
     for(int i = 0; i < MAXNODES; i++){
         if(rootlist[i]){
             printTree(rootlist[i]);
-            printf("\n\n");
+            printf("\n");
+            int moreRoots = 0;
+            for(int j = i + 1; j < MAXNODES; j++){
+                if(rootlist[j]){
+                    moreRoots = 1;
+                }
+            }
+            if(moreRoots){
+                printf("\n");
+            }
         }
     }
 }
