@@ -23,12 +23,13 @@
     }
     // malloc parent and child arrays
     int *firstChar = malloc(filelength * sizeof(int));
+    if(!firstChar) {
+      return 0;
+    }
     int *secondChar = malloc(filelength * sizeof(int));
-    if (!firstChar || !secondChar) {
-        fprintf(stderr, "Allocation failure\n");
-        free(firstChar); 
-        free(secondChar);
-        return 1;
+    if (!secondChar){
+      free(firstChar);
+      return 0;
     }
     for(int i = 0; i < filelength; i++){
       firstChar[i] = -1;
@@ -50,7 +51,7 @@
       return 0;
     }
     // creates tree and gets roots
-    Node **rootlist = malloc(MAXNODES * sizeof(Node *));
+    /*Node **rootlist = malloc(MAXNODES * sizeof(Node *));
     if(!rootlist) {
       free(firstChar);
       free(secondChar);
@@ -60,8 +61,8 @@
     } 
     for (int i = 0; i < MAXNODES; i++) {
       rootlist[i] = NULL;
-    }
-    rootlist = createTree(nodelist, firstChar, secondChar, filelength);
+    } */
+    Node ** rootlist = createTree(nodelist, firstChar, secondChar, filelength);
     if (rootlist == 0) {
         printf("Failed to create tree\n");
         freeRootlist(rootlist);
@@ -77,9 +78,9 @@
     printAllTrees(rootlist);
     // frees all allocated memory
     freeNodelist(nodelist);
-    free(nodelist);
-    // freeRootlist(rootlist);
-    free(rootlist);
+    // free(nodelist);
+    freeRootlist(rootlist);
+    // free(rootlist);
     free(firstChar);
     free(secondChar);
 

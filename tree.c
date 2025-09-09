@@ -18,6 +18,7 @@ void freeNodelist(Node ** nodelist){
     for(int i = 0; i < MAXNODES; i++){
         free(nodelist[i]);
     }
+    free(nodelist);
 }
 
 Node ** createNodelist(){
@@ -87,9 +88,11 @@ Node ** createTree(Node ** nodelist, int * firstChar, int * secondChar, int leng
 }
 
 void freeRootlist(Node ** rootlist){
-    for(int i = MAXNODES - 1; i >= 0; i--){
-        free(rootlist[i]);
-    }
+    /*for(int i = MAXNODES - 1; i >= 0; i--){
+        if(rootlist[i]){
+            free(rootlist[i]);
+        }
+    }*/
     free(rootlist);
 }
 

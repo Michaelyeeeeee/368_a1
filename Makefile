@@ -1,6 +1,6 @@
 
 CC = gcc
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -s
 SRCS = a1.c chars.c tree.c
 OBJS = $(SRCS:.c=.o)
 TARGET = a1
